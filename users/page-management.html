@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="generator" content="Pagespace">
+        <meta charset="utf-8">
+
+        <meta name="generator" content="Pagespace">
+        <meta name="description" content="">
+
+        <title>Pagespace | Page Management</title>
+
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link type="text/css" rel="stylesheet" href="../styles/site.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized-dark.min.css">
+    </head>
+    <body class="landing">
+        <header class="content-header">
+            <h1>
+                <span data-color="#ff005a" class="p">p</span><span data-color="#00D6F3" class="a">a</span><span data-color="#faa129" class="g">g</span><span data-color="#29f38f" class="e">e</span><span data-color="#cbcbcb">space</span>
+            </h1>
+            <nav class="util-nav">
+                <ul>
+                    <li><a href="../developers/tour.html">Developer guide</a></li>
+                    <li><a href="../users/start.html">User guide</a></li>
+                    <li><a href="https://github.com/pagespace/pagespace">Github <img src="../styles/img/github.svg"></a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="main">
+            <div class="wrap">
+                <nav class="content-nav">
+                    <div data-page-id="56abc1cf62f66cd8729a66e2" data-region="ContentNav"><div>
+<ul class="nav">
+            <li class=""><a href="../users/start.html">Get started</a></li>
+            <li class=""><a href="../users/page-management.html">Page Management</a></li>
+            <li class=""><a href="../users/page-editing.html">Page Editing</a></li>
+            <li class=""><a href="../users/publishing.html">Publishing</a></li>
+            <li class=""><a href="../users/site-settings.html">Site settings</a></li>
+            <li class=""><a href="../users/media.html">Media</a></li>
+            <li class=""><a href="../users/tips-and-tricks.html">Tips and tricks</a></li>
+</ul>
+</div></div>
+                </nav>
+                <section class="content">
+                    <div data-page-id="56abc1cf62f66cd8729a66e2" data-region="Main"><div>
+<div class="github-markdown">
+    <h1 id="page-management">Page management</h1>
+<p>Selecting the <i>Pages</i> tab displays the page of the website in the Sitemap. The Sitemap is an entry point to 
+performing the following tasks:</p>
+<ul>
+<li><a href="/users/site-settings.html">Configure site settings</a></li>
+<li><a href="/users/page-management#add-pages.html">Add pages</a></li>
+<li><a href="/users/page-management#view-and-edit.html">View and edit page content</a></li>
+<li><a href="/users/page-management#page-settings.html">Configure page settings</a></li>
+<li><a href="/users/page-management#page-details.html">View page details</a></li>
+<li><a href="/users/page-management#remove-pages.html">Remove pages</a></li>
+<li><a href="/users/page-management#reorder-pages.html">Re-order pages</a></li>
+<li><a href="/users/page-management#redirects.html">Setup page redirects</a></li>
+</ul>
+<p><a id="add-pages"></a></p>
+<h2 id="add-pages">Add pages</h2>
+<p>The Sitemap displays a visual overview of a website’s page structure. This is typically a tree-like structure with
+a set of top level pages which may have sub pages and, in turn, they may have more sub pages.</p>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/user-guide/images/site-map.png" width="100%" alt="Site map"></p>
+<p>To add a page:</p>
+<ol>
+<li>Select <i>Add and remove</i> in the left hand side menu.</li>
+<li>Press the <i>Add page</i> button on the page you would like to add a sub page to. To add a top-level page, click the <i>Add page</i> button on the site node at the most top-left.</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/user-guide/images/site-map-add.png" width="75%" alt="Add page on site map"></p>
+<ol start="3">
+<li> Complete the fields of the <em>Add page</em> form:
+</li></ol>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>The name of the page. This is likely to be displayed on the page itself, by the template.</td>
+</tr>
+<tr>
+<td>Url</td>
+<td>This URL relative to the site’s domain. It will be automatically generated based on the <em>Title</em>. The <i>Revert</i> button will revert the URL back to the automatically generated one.</td>
+</tr>
+<tr>
+<td>Use in Nav</td>
+<td>Should navigation menus display a link to this page?</td>
+</tr>
+<tr>
+<td>Published date</td>
+<td>If the page template displays a date associated with this page, you can choose what that date should be. This is an optional setting.</td>
+</tr>
+<tr>
+<td>Expires date</td>
+<td>If the page is used to display a blog post, for example, this setting can specify a date when the page should no longer appear on the blog roll. This is an optional setting.</td>
+</tr>
+<tr>
+<td>Template</td>
+<td>You must choose a template. Templates are configured by the site administrator or developer.<br>(If there is only one template in the system, this will be chosen automatically and this field will not appear)</td>
+</tr>
+<tr>
+<td>Based on page</td>
+<td>If a similar page already exists, choose a base page. If the template is configured accordingly, common page elements such as a navigation that exist on the base page will be automatically added to the new page.</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li> Press <i>Save</i> to complete the finish adding a new page.
+</li></ol>
+
+<p><a id="view-and-edit"></a></p>
+<h2 id="view-and-edit-page-content">View and edit page content</h2>
+<p>Pressing the title of a page opens a preview of the page with the ability to edit its content. </p>
+<p><a href="/users/page-editing.html">Read more about editing page content</a>.</p>
+<p><a id="page-settings"></a></p>
+<h2 id="configure-page-settings">Configure page settings</h2>
+<p>The configuration used to create a page can be modified:</p>
+<ol>
+<li>On the page tab, ensure <i>View and edit</i> is selected on the side menu.</li>
+<li>On the pages tab, viewing the sitemap, press the <i>settings</i> button on the page you would like to configure.</li>
+<li>Change the necessary settings and save.</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/user-guide/images/configure-page.png" width="100%" alt="Configure page"></p>
+<h3 id="synchronizing-includes">Synchronizing includes</h3>
+<p>If the page uses a <em>base page</em> and the includes configured to be shared have become out of sync, they can be 
+synchronized by pressing the <i>Sync includes</i> button. This will first display a preview of the includes to be 
+synchronized.</p>
+<p><a id="page-details"></a></p>
+<h2 id="view-page-details">View page details</h2>
+<p>When configuring a page, selecting <i>Details</i> in the side menu will display basic information such as who created 
+the page and when it was last changed.</p>
+<p>More advanced users may select <i>View JSON</i> to see the <abbr title="Javascript Object Notation">JSON</abbr> 
+notation of how the page is stored in the database.</p>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/user-guide/images/page-details.png" width="100%" alt="Add page on site map"></p>
+<p><a id="remove-pages"></a></p>
+<h2 id="remove-pages">Remove pages</h2>
+<p>To remove a page:</p>
+<ol>
+<li>Select <i>Add and remove</i> in the side menu</li>
+<li>Click the <i>&gt;Remove page</i> button on the page to remove.</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/user-guide/images/remove-page.png" width="50%" alt="Remove page on site map"></p>
+<p>If a page has not yet been published it will be removed immediately. If a page has been published, that is it is 
+live on the internet, some options are presented before the page is removed. This is so visitors and search engines 
+know how to deal with the missing page.</p>
+<p>These options are:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>This page used to be here</td>
+<td>The HTTP response code will be set to <strong>410 (gone)</strong> if this page is visited.</td>
+</tr>
+<tr>
+<td>Leave no trace of this page’s existence</td>
+<td>The HTTP response code will be set to <strong>404 (not found)</strong> if this page is visited.</td>
+</tr>
+<tr>
+<td>This page will redirect to</td>
+<td>Visits to this page will be redirected to another page. A <strong>301</strong> HTTP response code will be set.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.youtube.com/watch?v=xp5Nf8ANfOw">This video</a> explains more about 404 and 410 HTTP response codes.</p>
+<p><a id="reorder-pages"></a></p>
+<h2 id="re-order-pages">Re-order pages</h2>
+<p>The position of a page in a sub-tree of the page structure can be changed.</p>
+<p>To move a page:</p>
+<ol>
+<li>Select <i>Re-order</i> in the left hand side menu.</li>
+<li>Press the arrow button on the page until the page is in the desired position.</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/user-guide/images/reorder-pages.png" width="75%" alt="Re-order pages"></p>
+<p><a id="page-redirects"></a></p>
+<h2 id="page-redirects">Page redirects</h2>
+<p>A page can be configured to redirect to another page in the website.</p>
+<p>To setup a redirect:</p>
+<ol>
+<li>On the page tab, ensure <em>View and edit</em> is selected on the left hand menu.</li>
+<li>On the pages tab, press the <i>settings</i> icon on the page you would like to configure.</li>
+<li>Select <i>Redirect</i> in the side menu.</li>
+<li>Choose the page to redirect to and if the redirect is permanent (301 HTTP status) or temporary (302 HTTP status).</li>
+<li>Press <i>Save</i> to complete the action.</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/user-guide/images/redirect.png" width="100%" alt="Redirect page"></p>
+<p>A redirected page will be marked on the sitemap:</p>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/user-guide/images/sitemap-redirect-page.png" width="50%" alt="Redirect page on sitemap"></p>
+
+</div>
+</div></div>
+                </section>
+            </div>
+        </main>
+        <footer class="footer">
+            <p>Pagespace &copy; 2016</p>
+        </footer>
+    </body>
+</html>

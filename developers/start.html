@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="generator" content="Pagespace">
+        <meta charset="utf-8">
+
+        <meta name="generator" content="Pagespace">
+        <meta name="description" content="">
+
+        <title>Pagespace | Start</title>
+
+        <link rel="shortcut icon" href="../favicon.ico">
+        <link type="text/css" rel="stylesheet" href="../styles/site.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized-dark.min.css">
+    </head>
+    <body class="landing">
+        <header class="content-header">
+            <h1>
+                <span data-color="#ff005a" class="p">p</span><span data-color="#00D6F3" class="a">a</span><span data-color="#faa129" class="g">g</span><span data-color="#29f38f" class="e">e</span><span data-color="#cbcbcb">space</span>
+            </h1>
+            <nav class="util-nav">
+                <ul>
+                    <li><a href="../developers/tour.html">Developer guide</a></li>
+                    <li><a href="../users/start.html">User guide</a></li>
+                    <li><a href="https://github.com/pagespace/pagespace">Github <img src="../styles/img/github.svg"></a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="main">
+            <div class="wrap">
+                <nav class="content-nav">
+                    <div data-page-id="56bc37e182f1a0600fec83c4" data-region="ContentNav"><div>
+<ul class="side-nav">
+            <li class=" active"><a href="../developers/start.html">Start</a></li>
+            <li class=""><a href="../developers/tour.html">Tour</a></li>
+            <li class=""><a href="../developers/templates.html">Templates</a></li>
+            <li class=""><a href="../developers/plugins.html">Plugins</a></li>
+            <li class=""><a href="../developers/apis.html">APIs</a></li>
+            <li class=""><a href="../developers/static-site-generator.html">Static site generator</a></li>
+</ul>
+</div></div>
+                </nav>
+                <section class="content">
+                    <div data-page-id="56bc37e182f1a0600fec83c4" data-region="Main"><div>
+<div class="github-markdown">
+    <h1 id="get-started">Get Started</h1>
+<h2 id="prerequisites">Prerequisites</h2>
+<h4 id="node-js">Node.js</h4>
+<p>Pagespace runs on <a href="https://nodejs.org">Node.JS</a>. It should run on version &gt;= 0.10, but the current stable version
+is recommended</p>
+<h4 id="mongodb">MongoDB</h4>
+<p>Pagespace uses <a href="https://www.mongodb.org/">MongoDB</a> as its data store. </p>
+<h2 id="setup">Setup</h2>
+<p>Pagespace integrates with <a href="http://expressjs.com/">Express 4</a> as middleware. </p>
+<p>Start by either generating a new Express application from scratch or integrating with an existing Express application.</p>
+<h3 id="generating-a-new-express-pagespace-app">Generating a new Express/Pagespace app</h3>
+<p>A <a href="">Slush generator is available</a> to generate a new Pagespace application from scratch.</p>
+<p>Start by installing Slush:</p>
+<pre><code>npm <span class="hljs-operator"><span class="hljs-keyword">install</span> slush -<span class="hljs-keyword">g</span></span>
+</code></pre><p>then installing the Pagespace generator:</p>
+<pre><code>npm <span class="hljs-operator"><span class="hljs-keyword">install</span> slush-pagespace -<span class="hljs-keyword">g</span></span>
+</code></pre><p>Now create a new directory for you application and run the generator:</p>
+<pre><code><span class="hljs-keyword">mkdir</span> <span class="hljs-keyword">my</span>-site &amp;&amp; cd <span class="hljs-keyword">my</span>-site
+slush pagespace
+</code></pre><p>Get started by visiting the dashboard app at <a href="http://localhost:3000/_dashboard">http://localhost:3000/_dashboard</a></p>
+<h3 id="integrating-with-an-existing-express-app">Integrating with an existing Express app</h3>
+<p>Install Pagesapce:</p>
+<pre><code>npm <span class="hljs-operator"><span class="hljs-keyword">install</span> pagesapce <span class="hljs-comment">--save</span></span>
+</code></pre><p>Your Express setup should include something like this:</p>
+<pre><code class="lang-javascript">
+<span class="hljs-comment">// require pagespace and required peer dependencies: Express + bodyParser, cookieParser and session</span>
+<span class="hljs-keyword">var</span> pagespace = <span class="hljs-built_in">require</span>(<span class="hljs-string">'pagespace'</span>);
+<span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-keyword">var</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'body-parser'</span>);
+<span class="hljs-keyword">var</span> cookieParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cookie-parser'</span>);
+<span class="hljs-keyword">var</span> session = <span class="hljs-built_in">require</span>(<span class="hljs-string">"express-session"</span>);
+
+<span class="hljs-keyword">var</span> app = express();
+
+<span class="hljs-comment">// initialize body parser, cookie parser or session middleware for all routes expect Pagespace static routes</span>
+app.use(<span class="hljs-regexp">/^(?!\/_static).+/</span>, [ bodyParser.json(), cookieParser(), session({secret: process.env.SESSION_SECRET || <span class="hljs-string">'foo'</span>})]);
+
+<span class="hljs-comment">// configure the pagespace view directory and a custom templates directory as Express view locations</span>
+app.set(<span class="hljs-string">'views'</span>, [ pagespace.getViewDir(), <span class="hljs-string">'/theme/templates'</span> ]);
+
+<span class="hljs-comment">// configure view templates with the 'hbs' extension to use the Pagespace view engine</span>
+app.engine(<span class="hljs-string">'hbs'</span>, pagespace.getViewEngine());
+
+<span class="hljs-comment">// initialize and add Pagespace middleware</span>
+app.use(pagespace.init({
+    db: <span class="hljs-string">'mongodb://localhost/my-site'</span>
+}));
+</code></pre>
+<p>Check out the full <a href="">API documentation</a> for more options when initializing Pagespace. Also see the Slush generator for 
+<a href="https://github.com/pagespace/slush-pagespace/blob/master/templates/app.js">a complete example of the Express setup</a></p>
+<h2 id="plugins">Plugins</h2>
+<p>Install some  plugins that you wamt to build your site with:</p>
+<pre><code><span class="hljs-id">#navigation</span>
+npm install pagesapce-<span class="hljs-tag">nav</span> --save
+
+<span class="hljs-id">#html</span>
+npm install pagespace-<span class="hljs-tag">html</span> --save
+
+<span class="hljs-id">#web</span> copy (wysiwig <span class="hljs-tag">html</span> editor)
+npm install pagesapce-webcopy --save
+
+<span class="hljs-id">#markdown</span> 
+npm install pagespace-markdown --save
+
+<span class="hljs-id">#blog</span> post roll
+npm install pagespace-posts --save
+</code></pre><h2 id="start-the-server">Start the server</h2>
+<p>Run</p>
+<pre><code><span class="hljs-built_in">npm</span> start
+</code></pre><p>and visit the Dashboard at <a href="http://localhost:3000/_dashboard">http://localhost:3000/_dashboard</a></p>
+
+</div>
+</div></div>
+                </section>
+            </div>
+        </main>
+        <footer class="footer">
+            <p>Pagespace &copy; 2016</p>
+        </footer>
+    </body>
+</html>
