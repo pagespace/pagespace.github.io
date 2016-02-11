@@ -10,6 +10,7 @@
         <title>Pagespace | Tour</title>
 
         <link rel="shortcut icon" href="favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="styles/site.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized-dark.min.css">
     </head>
@@ -43,7 +44,128 @@
                 <section class="content">
                     <div data-page-id="56abbf92d2ac681672fefa40" data-region="Main"><div>
 <div class="github-markdown">
-    
+    <h1 id="a-tour-of-pagespace">A Tour of Pagespace</h1>
+<p>This page summarizes the key technical concepts of Pagespace.</p>
+<ol>
+<li><a href="/developers#data-model.html">Data Model</a></li>
+<li><a href="/developers#templates.html">Templates</a></li>
+<li><a href="/developers#plugins.html">Plugins</a></li>
+<li><a href="/developers#include-sharing.html">Include sharing</a></li>
+<li><a href="/developers#handling-requests.html">Handling requests</a></li>
+<li><a href="/developers#rest-api.html">REST API</a></li>
+<li><a href="/developers#user-roles.html">User roles</a></li>
+<li><a href="/developers#publishing.html">Publishing</a></li>
+</ol>
+<p><a id="data-model"></a></p>
+<h2 id="data-model">Data model</h2>
+<p>Pagespace’s data model looks like this:</p>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/dev-guide/images/data-model.png" width="100%" alt="Data model"></p>
+<p>A Pagespace website is composed of a number of <strong>pages</strong>. Pages contain <strong>regions</strong> which, in turn, contain 
+zero or more <strong>includes</strong>. Includes are responsible for displaying the functional components and the content of a 
+website.</p>
+<p>The data that an include owns is managed by a <strong>plugin</strong>. Plugins define how an include’s content is displayed and 
+managed. Plugins manage content or components of a web site such as navigation, HTML copy, markdown, image galleries or
+blog rolls.</p>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/dev-guide/images/wireframe-regions.png" width="100%" alt="Regions wireframe"></p>
+<p><a id="templates"></a></p>
+<h2 id="templates">Templates</h2>
+<p>Each page uses an HTML template. Templates are authored as <a href="http://handlebarsjs.com/">Handlebars</a> templates. Within 
+the code of a template, Handlebars partials are used to define regions. Regions are then manageable when editing a page 
+in the Pagespace dashboard where includes may be added, removed and edited.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">header</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"header"</span>&gt;</span>{{site.name}}<span class="hljs-tag">&lt;/<span class="hljs-title">header</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar"</span>&gt;</span>
+    {{#Sidebar}}
+        {{&gt; Sidebar}}
+    {{/Sidebar}}
+<span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">main</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"main"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>{{page.name}}<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+    {{#Main}}
+        {{&gt; Main}}
+    {{/Main}}
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"footer"</span>&gt;</span>
+    {{#Footer}}
+        {{&gt; Footer}}
+    {{/Footer}}
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+<p><a id="plugins"></a></p>
+<h2 id="plugins">Plugins</h2>
+<p>Pagespace plugins are created as regular Node modules. They utilize <a href="https://www.npmjs.com/">NPM</a> for distribution and 
+installation. </p>
+<p>A plugin is composed of:</p>
+<ul>
+<li>A schema, defined as JSON, within the module’s <code>package.json</code> file</li>
+<li>A Handlebars partial template</li>
+<li>A Javascript object that implements the Pagespace plugin interface. Implementing the plugin interface is a matter of
+writing the <code>process()</code> method. This method must process an include’s data before it is passed to the plugin’s 
+template. This may just be a case of passing the data straight through or maybe using the data as configuration to 
+get data from another source.</li>
+<li>Optionally, a plugin may include custom static files for editing the data it manages.</li>
+</ul>
+<p>The keywords in a plugin’s <code>package.json</code> should contain the keyword <em>pagespace-plugin</em>. Installed Node modules in a 
+Pagespace application with this keyword will be automatically imported into the system when it starts.</p>
+<p><a id="include-sharing"></a></p>
+<h2 id="include-sharing">Include sharing</h2>
+<p>In the data model of a template, each region of a template is given a sharing strategy.</p>
+<p>A page’s data model may contain a <strong>base-page</strong>. When creating a new page, if a base-page is defined, the new page will 
+share the contents of the regions based on their sharing strategy.</p>
+<p><a id="handling-requests"></a></p>
+<h2 id="request-handling">Request Handling</h2>
+<p>Pagespace attempts to handle each request, via its <a href="http://expressjs.com/">Express</a> middleware, by internally 
+matching it to one of the following URL patterns:</p>
+<ul>
+<li><code>/_dashboard</code>: Serves the administration console</li>
+<li><code>/_api</code>: API for inspecting the data model</li>
+<li><code>/_media</code>: Serving and uploading managed media items</li>
+<li><code>/_auth</code>: Authorization operations, login/logout</li>
+<li><code>/_templates</code>: Utilities for managing templates</li>
+<li><code>/_publish</code>: Publishing API</li>
+<li><code>/_static</code>: Serves Pagespace’s static resources</li>
+</ul>
+<p>URLs reserved by Pagespace are prefixed with an underscore.</p>
+<p>If the request URL does not match any of these patterns, Pagespace will try to lookup and serve a Page with a 
+matching URL.</p>
+<p>If a match is still not found, the request will be passed to the next Express middleware.</p>
+<p><a id="rest-api"></a></p>
+<h2 id="rest-api">REST API</h2>
+<p>Administrators can inspect or modify the data model via the REST API:</p>
+<ul>
+<li><code>/_api/sites</code> GET, POST</li>
+<li><code>/_api/sites/{siteId}</code> GET, PUT, DELETE</li>
+<li><code>/_api/pages</code> GET, POST</li>
+<li><code>/_api/pages/{pageId}</code> GET, PUT, DELETE</li>
+<li><code>/_api/templates</code> GET, POST</li>
+<li><code>/_api/templates/{templateId}</code> GET, PUT, DELETE</li>
+<li><code>/_api/includes</code> GET, POST</li>
+<li><code>/_api/includes/{includeId}</code> GET, PUT, DELETE</li>
+<li><code>/_api/users</code> GET, POST</li>
+<li><code>/_api/users/{userId}</code> GET, PUT, DELETE</li>
+<li><code>/_api/media</code> GET, POST</li>
+<li><code>/_api/media/{mediaId}</code> GET, PUT, DELETE</li>
+<li><code>/_api/plugins</code> GET, POST</li>
+<li><code>/_api/plugins/{mediaId}</code> GET, PUT, DELETE</li>
+</ul>
+<p><a id="user-roles"></a></p>
+<h2 id="user-roles">User roles</h2>
+<p>Users of Pagespace system may have one of the following roles:</p>
+<ul>
+<li><strong>admin</strong> Administrators have access to the Dashboard and full administrative rights</li>
+<li><strong>developer</strong> Developers have the same rights as admins except they may not modify other <em>users</em></li>
+<li><strong>editor</strong> Editors have the same rights as developers except they may not modify <em>templates</em> and <em>plugins</em></li>
+<li><strong>guest</strong> Guests have no access rights and are typically viewers of the web site</li>
+</ul>
+<p><a id="publishing"></a></p>
+<h2 id="publishing">Publishing</h2>
+<p>The Mongo collections which store <strong>Pages</strong>, <strong>Templates</strong> and <strong>Includes</strong> store unpublished data which is not 
+publicly accessible. Editing this data puts it in a draft state. Pages marked as drafts may be published; this 
+replicates the  contents of these collections to their <em>live</em> equivalents: <code>Pages_live</code>, <code>Templates_live</code> and 
+<code>Includes_live</code>, making them publicly accessible.</p>
+
 </div>
 </div></div>
                 </section>

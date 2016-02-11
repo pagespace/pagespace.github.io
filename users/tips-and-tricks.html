@@ -10,6 +10,7 @@
         <title>Pagespace | Tips and tricks</title>
 
         <link rel="shortcut icon" href="../favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="../styles/site.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized-dark.min.css">
     </head>
@@ -44,7 +45,33 @@
                 <section class="content">
                     <div data-page-id="56abc25e62f66cd8729a66ec" data-region="Main"><div>
 <div class="github-markdown">
-    
+    <h1 id="tips-and-tricks">Tips and tricks</h1>
+<h2 id="blogging">Blogging</h2>
+<ol>
+<li>Decide on a page to display the blog roll, the list of blog posts.</li>
+<li>Add and configure an include to this page that uses the <strong>Posts</strong> plugin.</li>
+<li>Sub pages of the ‘blog roll’ page will now effectively be blog posts.</li>
+</ol>
+<h2 id="default-sub-pages">Default sub-pages</h2>
+<p>Imagine you want to organize a series of pages into a section of the website:</p>
+<ul>
+<li><code>/ingredients/anchove</code></li>
+<li><code>/ingredients/pineapple</code></li>
+<li><code>/ingredients/pepper</code></li>
+</ul>
+<p>But <code>/ingredients</code> itself is not a page. </p>
+<p>To solve this problem, you could create these pages as top level pages, but that might become difficult to
+manage. Instead, add these pages as sub-pages of an ‘Ingredients’ page and use a redirect to force the ‘Ingredients’ 
+page to link to its first sub page:</p>
+<ul>
+<li><code>/ingredients &gt; /ingredients/anchovy</code> (301 redirect) </li>
+<li><code>/ingredients/anchovy</code></li>
+<li><code>/ingredients/pineapple</code></li>
+<li><code>/ingredients/pepper</code></li>
+</ul>
+<h2 id="customizing-editing-colors">Customizing editing colors</h2>
+<p>Select the letters in the Pagespace title to change the editing color.</p>
+
 </div>
 </div></div>
                 </section>

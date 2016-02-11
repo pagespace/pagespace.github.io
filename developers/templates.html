@@ -10,6 +10,7 @@
         <title>Pagespace | Templates</title>
 
         <link rel="shortcut icon" href="../favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="../styles/site.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized-dark.min.css">
     </head>
@@ -43,7 +44,95 @@
                 <section class="content">
                     <div data-page-id="56abbff7d2ac681672fefa42" data-region="Main"><div>
 <div class="github-markdown">
-    
+    <h1 id="templates">Templates</h1>
+<ul>
+<li><a href="/developers/templates#writing-a-template.html">Writing a template</a></li>
+<li><a href="/developers/templates#regions-and-includes.html">Regions and includes</a></li>
+<li><a href="/developers/templates#importing-a-template.html">Importing a template</a></li>
+<li><a href="/developers/templates#template-properties.html">Template properties</a></li>
+<li><a href="/developers/templates#include-sharing.html">Include sharing</a></li>
+<li><a href="/developers/templates#using-a-template.html">Using a template</a></li>
+</ul>
+<p><a id="writing-a-template"></a></p>
+<h2 id="writing-a-template">Writing a template</h2>
+<p>Pagespace renders each page using <a href="http://handlebarsjs.com/">Handlebars</a> templates.</p>
+<p>You can use the Handlebars template to include meta data about the page or define page <strong>regions</strong> using Handlebars partials. For example, the following template will:</p>
+<ol>
+<li>Print the site name and page name in the HTML title tag</li>
+<li>Print the site description in a meta tag</li>
+<li>Print the page name in the header </li>
+<li>Define a  <em>Sidebar</em> region and a <em>Region</em> region using partials </li>
+<li>Include an analytics scriptlet at the end of the document</li>
+</ol>
+<pre><code class="lang-html"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"utf-8"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"generator"</span> <span class="hljs-attribute">content</span>=<span class="hljs-value">"Pagespace"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"description"</span> <span class="hljs-attribute">content</span>=<span class="hljs-value">"{{ site.description }}"</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>{{ site.name }} | {{page.name}}<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/css/site.css"</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"wrap"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">header</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"header"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>{{page.name}}<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">header</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sidebar"</span>&gt;</span>
+                {{#Sidebar}}
+                    {{&gt; Sidebar}}
+                {{/Sidebar}}
+            <span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"main"</span>&gt;</span>
+                {{#Main}}
+                    {{&gt; Main}}
+                {{/Main}}
+            <span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="handlebars"><span class="xml">
+            </span><span class="hljs-expression">{{{<span class="hljs-variable">site.analytics</span>}}</span><span class="xml">}
+        </span></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<p><a id="regions-and-includes"></a></p>
+<h2 id="regions-and-includes">Regions and Includes</h2>
+<p>Pagespace populates each region with zero or more <strong>includes</strong>, as configured by editing a page in the Dashboard. 
+<a href="">See the tour</a> for more information.</p>
+<p><a id="importing-a-template"></a></p>
+<h2 id="importing-a-template">Importing a template</h2>
+<p>Once you’ve written a page template, make sure it is located in a configured 
+<a href="http://expressjs.com/en/4x/api.html#app.set">Express views directory</a>. Then, in the
+Pagespace Dashboard, go to <strong>Templates</strong> | <strong>Create template</strong>. Give your template a name and then select the template
+file from the <em>source</em> select box.</p>
+<p>Pagespace will automatically scan your template for its defined regions. From here you can define the template 
+properties and the sharing strategy for each region.</p>
+<p><a id="template-properties"></a></p>
+<h2 id="template-properties">Template properties</h2>
+<p>Template properties can be used to make different templates based on the same template source file. For example,
+we could create two identical templates, with the exception that one is configured to display the date of the page it 
+is rendering:</p>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/dev-guide/images/template-properties.png" width="100%" alt="Template properties"></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">p</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"date"</span>&gt;</span>
+    {{#if template.showDate }}
+        {{ formatDate page.publishedAt day="numeric" month="long" year="numeric" }}
+    {{/if}}
+<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+</code></pre>
+<p><a id="include-sharing"></a></p>
+<h2 id="include-sharing">Include sharing</h2>
+<p>When one page is based on another the includes in a given region may be shared between both pages. Meaning common page
+elements, such as navigation and footer content, do not need to recreated and duplicated for each page.</p>
+<p><img src="https://raw.githubusercontent.com/pagespace/pagespace/master/docs/dev-guide/images/template-include-sharing.png" width="100%" alt="Template include sharing"></p>
+<p><a id="using-a-template"></a></p>
+<h2 id="using-a-template">Using a template</h2>
+<p>In the Pagespace Dashboard, go to the <strong>Sitemap</strong> section to add a page. When setting up the new page you will
+be able to select the page template you have just created.</p>
+
 </div>
 </div></div>
                 </section>

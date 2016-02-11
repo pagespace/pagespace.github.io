@@ -56,20 +56,22 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
+/*
 @font-face {
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 200;
   src: local("Raleway ExtraLight"), local("Raleway-ExtraLight"), url(fonts/raleway-extralight.woff2) format("woff2");
-  unicode-range: U0-0FF, U131, U152-153, U2C 6, U2DA, U2DC, U2000-206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000; }
+  unicode-range: U0-0FF, U131, U152-153, U2C 6, U2DA, U2DC, U2000-206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000;
+}
 
 @font-face {
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   src: local("Raleway"), url(fonts/raleway-normal.woff2) format("woff2");
-  unicode-range: U0-0FF, U131, U152-153, U2C 6, U2DA, U2DC, U2000-206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000; }
-
+  unicode-range: U0-0FF, U131, U152-153, U2C 6, U2DA, U2DC, U2000-206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000;
+}*/
 .wysiwyg-text-align-left {
   text-align: left; }
 

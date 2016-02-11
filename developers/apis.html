@@ -10,6 +10,7 @@
         <title>Pagespace | APIs</title>
 
         <link rel="shortcut icon" href="../favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="../styles/site.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized-dark.min.css">
     </head>
@@ -43,7 +44,82 @@
                 <section class="content">
                     <div data-page-id="56abc052d2ac681672fefa46" data-region="Main"><div>
 <div class="github-markdown">
-    
+    <h1 id="apis">APIs</h1>
+<ol>
+<li><a href="/developers/apis#middleware.html">Middleware API</a></li>
+<li><a href="/developers/apis#plugin.html">Plugin API</a></li>
+</ol>
+<p><a id="middleware"></a></p>
+<h2 id="middleware-api">Middleware API</h2>
+<pre><code><span class="hljs-keyword">var</span> pagesapce = <span class="hljs-built_in">require</span>(<span class="hljs-string">'pagespace'</span>);
+</code></pre><h3 id="pagespace-getviewengine-">pagespace.getViewEngine()</h3>
+<p>Returns the instance of the Pagespace view engine. </p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> viewEngine = pagespace.getViewEngine();
+app.engine(<span class="hljs-string">'hbs'</span>, viewEngine);
+</code></pre>
+<h3 id="pagespace-getviewdir-">pagespace.getViewDir()</h3>
+<p>Returns the Pagespace view directory. Use this as Express view config</p>
+<pre><code class="lang-javascript">app.set(<span class="hljs-string">'views'</span>, [ pagespace.getViewDir(), <span class="hljs-string">'other/dirs'</span> ]);
+</code></pre>
+<h3 id="pagespace-getdefaulttemplatedir-">pagespace.getDefaultTemplateDir()</h3>
+<p>Returns the default, example template directory, use this for a quick start</p>
+<pre><code class="lang-javascript">app.set(<span class="hljs-string">'views'</span>, [ pagespace.getViewDir(), pagespace.getDefaultTemplateDir() ]);
+</code></pre>
+<h3 id="pagespace-init-opts-">pagespace.init(opts)</h3>
+<p>Returns initialized middleware ready to use with Express</p>
+<pre><code><span class="hljs-tag">app</span><span class="hljs-class">.use</span>(<span class="hljs-tag">pagespace</span><span class="hljs-class">.init</span>(<span class="hljs-tag">opts</span>));
+</code></pre><h4 id="opts-db">opts.db</h4>
+<p>MongoDB connection string. <em>Required</em></p>
+<h4 id="opts-dboptions">opts.dbOptions</h4>
+<p>See <a href="http://mongoosejs.com/docs/connections.html">Mongoose connection options</a></p>
+<h4 id="opts-logger">opts.logger</h4>
+<p>A custom <a href="https://github.com/trentm/node-bunyan">Bunyan</a> logger. Overrides the default logger.</p>
+<h4 id="opts-loglevel">opts.logLevel</h4>
+<p>The <a href="https://github.com/trentm/node-bunyan#levels">log level</a> to use with the default logger. Not relevant if using a 
+custom logger. Defaults to <code>info</code>. </p>
+<h4 id="opts-mediadir">opts.mediaDir</h4>
+<p>Directory where media uploads are stored. Defaults to <code>[baseDir]/media-uploads</code></p>
+<h4 id="opts-commonviewlocals">opts.commonViewLocals</h4>
+<p>Locals that should be made available for every Handlebars template</p>
+<h4 id="opts-locale">opts.locale</h4>
+<p><a href="https://www.w3.org/International/articles/language-tags/">BCP47 Language tag</a> to use with 
+<a href="http://formatjs.io/handlebars/">Format.JS</a> Handlebars helpers, which may be used in templates.</p>
+<h4 id="opts-cacheopts">opts.cacheOpts</h4>
+<p>Live plugin results are cached per include. Internally Pagespace uses Cacheman for this. By default these are 
+cached in memory, but you can uses an alternative Cacheman engine implementation such as Redis.
+See <a href="https://github.com/cayasso/cacheman#api">Cacheman options</a></p>
+<h3 id="pagespace-ready-callback-">pagespace.ready(callback)</h3>
+<p>Fires a node style callback when Pagespace is ready (it will be ready shortly after the Express server has started.
+Alternatively, this method returns a Promise.</p>
+<pre><code class="lang-javascript">pagespace.ready(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+    <span class="hljs-keyword">if</span>(err) {
+        <span class="hljs-built_in">console</span>.error(err);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Pagespace ready'</span>);
+    }
+});
+</code></pre>
+<p>or</p>
+<pre><code>pagespace.ready().then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Pagespace ready'</span>);
+}).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.error(err);
+});
+</code></pre><h3 id="pagesapce-stop-">pagesapce.stop()</h3>
+<p>Forcefully stop the Pagespace middleware from processing requests. This is useful for tests, but not usually
+necessary to call.</p>
+<pre><code class="lang-javascript">pagesapce.stop()
+</code></pre>
+<p><a id="plugin"></a></p>
+<h2 id="plugin-api">Plugin API</h2>
+<p>When authoring Pagespace plugins, a utility API is available on the <code>pagespace</code> global object</p>
+<h3 id="pagespace-getmodel-modelname-">pagespace.getModel(modelNAme)</h3>
+<p>Get a <a href="http://mongoosejs.com/docs/models.html">Mongoose model</a> to interact with the database</p>
+<pre><code class="lang-javascript">pagespace.getModel(<span class="hljs-string">'Page'</span>);
+</code></pre>
+<h3 id="pagespace-logger">pagespace.logger</h3>
+<p>A <a href="https://github.com/trentm/node-bunyan">Bunyan</a> logger object to log with</p>
+
 </div>
 </div></div>
                 </section>

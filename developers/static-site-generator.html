@@ -10,6 +10,7 @@
         <title>Pagespace | Static site generator</title>
 
         <link rel="shortcut icon" href="../favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,300" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="../styles/site.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/solarized-dark.min.css">
     </head>
@@ -43,7 +44,26 @@
                 <section class="content">
                     <div data-page-id="56abc069d2ac681672fefa48" data-region="Main"><div>
 <div class="github-markdown">
-    
+    <h1 id="static-site-generation">Static site generation</h1>
+<p>Pagespace can be used to generate static sites.</p>
+<p>A typical scenario is to run a local Pagesapce server, editing wiki entries or blog posts using the 
+<a href="https://github.com/pagespace/pagespace-markdown">Markdown plugin</a> and using the static site generator to deploy it 
+to a service such as <a href="https://pages.github.com/">Github pages</a> or a static file  server.</p>
+<p>To generate a static site, use the <a href="https://github.com/pagespace/pagespace-cli">Pagespace CLI</a>.</p>
+<pre><code>npm <span class="hljs-operator"><span class="hljs-keyword">install</span> pagespace-cli -<span class="hljs-keyword">g</span></span>
+</code></pre><p>Ensure a Pagespace server is running a do:</p>
+<pre><code>pagespace <span class="hljs-keyword">static</span> -h <span class="hljs-string">http:</span><span class="hljs-comment">//localhost:3000 -o /path/to/output -a admin:admin</span>
+</code></pre><h2 id="how-it-works">How it works</h2>
+<p>The generator works by</p>
+<ul>
+<li>getting the rendered output of each page in the database</li>
+<li>resolving the urls of links and urls to be document-relative</li>
+<li>storing the rendered page as an HTML file in the correct relative location</li>
+</ul>
+<h2 id="caveats">Caveats</h2>
+<p>URLs within external resources such as CSS files (e.g. <code>background: url(/site-relative/image.png)</code>) will not be resolved.
+You must either include such styles inline in the Handlebars template or update them manually.</p>
+
 </div>
 </div></div>
                 </section>
