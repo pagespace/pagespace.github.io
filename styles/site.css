@@ -134,33 +134,43 @@ html.content-page {
 .e {
   color: #29f38f; }
 
-.util-nav {
+.landing-page .util-nav {
+  position: fixed;
+  top: 14px;
+  right: 10px; }
+
+.content-page .util-nav {
   float: right;
   font-size: 18px; }
   @media (max-width: 1127px) {
-    .util-nav {
+    .content-page .util-nav {
       clear: left;
       float: left; } }
-  .util-nav li {
-    display: inline-block;
-    padding-left: 13px;
-    padding-right: 10px;
-    border-left: 1px solid #001619;
-    min-height: 21px; }
-  .util-nav li:first-child {
-    border-left: none;
-    padding-left: 0; }
-  .util-nav li img {
-    display: inline-block;
-    height: 21px;
-    vertical-align: middle;
-    margin-left: 4px; }
-  .util-nav a {
-    color: #001619;
-    text-decoration: none;
-    letter-spacing: 1px; }
-  .util-nav a:hover {
-    color: #00565c; }
+
+.util-nav li {
+  display: inline-block;
+  padding-left: 13px;
+  padding-right: 10px;
+  border-left: 1px solid #001619;
+  min-height: 21px; }
+
+.util-nav li:first-child {
+  border-left: none;
+  padding-left: 0; }
+
+.util-nav li img {
+  display: inline-block;
+  height: 21px;
+  vertical-align: middle;
+  margin-left: 4px; }
+
+.util-nav a {
+  color: #001619;
+  text-decoration: none;
+  letter-spacing: 1px; }
+
+.util-nav a:hover {
+  color: #00565c; }
 
 .wrap {
   max-width: 1044px;
