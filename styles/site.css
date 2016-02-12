@@ -102,6 +102,9 @@ html {
   background: #002D35;
   font-family: 'Raleway', sans-serif; }
 
+html.content-page {
+  background: #fff; }
+
 /* -- Landing page ---------------------------------------------------------------------------------------------------*/
 .landing-header {
   position: relative;
@@ -110,6 +113,7 @@ html {
   background: linear-gradient(135deg, #FFF 0%, #DADADA 37%, #FFF 106%); }
 
 .landing-header h1 {
+  float: let;
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
   text-transform: uppercase;
@@ -131,10 +135,12 @@ html {
   color: #29f38f; }
 
 .util-nav {
-  position: fixed;
-  top: 14px;
-  right: 10px;
+  float: right;
   font-size: 18px; }
+  @media (max-width: 1127px) {
+    .util-nav {
+      clear: left;
+      float: left; } }
   .util-nav li {
     display: inline-block;
     padding-left: 13px;
@@ -142,7 +148,8 @@ html {
     border-left: 1px solid #001619;
     min-height: 21px; }
   .util-nav li:first-child {
-    border-left: none; }
+    border-left: none;
+    padding-left: 0; }
   .util-nav li img {
     display: inline-block;
     height: 21px;
@@ -162,7 +169,10 @@ html {
 
 .main {
   background: #fff;
-  padding: 80px 0; }
+  padding: 80px 22px; }
+  @media (max-width: 1127px) {
+    .main {
+      padding: 91px 22px 80px 22px; } }
   .main:after {
     content: "";
     display: table;
@@ -181,7 +191,8 @@ html {
   width: 522px;
   padding: 0 50px;
   text-align: center;
-  float: left; }
+  float: left;
+  margin-bottom: 3em; }
 
 .landing-section h2 {
   font-size: 26px;
@@ -203,6 +214,7 @@ html {
   background: linear-gradient(135deg, #DADADA 0%, #FFF 106%); }
 
 .content-header h1 {
+  float: left;
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
   text-transform: uppercase;
@@ -210,15 +222,30 @@ html {
   font-size: 26px;
   color: #A2A2A2;
   letter-spacing: 18px; }
+  @media (max-width: 1127px) {
+    .content-header h1 {
+      margin-bottom: 22px; } }
 
 .content-nav {
   float: left;
   min-height: 100px;
-  width: 25%; }
+  width: 25%;
+  margin-bottom: 2em; }
+  @media (max-width: 1127px) {
+    .content-nav {
+      width: auto;
+      border-bottom: 2px solid #00D6F3;
+      padding: 22px;
+      margin: 0 -22px 20px -22px;
+      background: #F4F4F4; } }
 
 .content-nav li {
   line-height: 2em;
   font-size: 18px; }
+  @media (max-width: 1127px) {
+    .content-nav li {
+      float: left;
+      margin-right: 22px; } }
 
 .content-nav li.active {
   font-weight: bold; }
@@ -236,6 +263,9 @@ html {
 .content {
   float: left;
   width: 75%; }
+  @media (max-width: 1127px) {
+    .content {
+      width: auto; } }
 
 .content h1 {
   margin-bottom: 1em;
