@@ -111,9 +111,11 @@ html.content-page {
   padding: 160px 0 150px 0;
   border-bottom: 2px solid #00D6F3;
   background: linear-gradient(135deg, #FFF 0%, #DADADA 37%, #FFF 106%); }
+  @media (max-width: 1127px) {
+    .landing-header {
+      padding: 87px 0 44px 0; } }
 
 .landing-header h1 {
-  float: let;
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
   text-transform: uppercase;
@@ -121,6 +123,10 @@ html.content-page {
   font-size: 67px;
   color: #C1C1C1;
   letter-spacing: 25px; }
+  @media (max-width: 1127px) {
+    .landing-header h1 {
+      letter-spacing: 14px;
+      font-size: 33px; } }
 
 .p {
   color: #ff005a; }
@@ -138,6 +144,10 @@ html.content-page {
   position: fixed;
   top: 14px;
   right: 10px; }
+  @media (max-width: 1127px) {
+    .landing-page .util-nav {
+      left: 22px;
+      position: absolute; } }
 
 .content-page .util-nav {
   float: right;
@@ -145,7 +155,8 @@ html.content-page {
   @media (max-width: 1127px) {
     .content-page .util-nav {
       clear: left;
-      float: left; } }
+      float: left;
+      font-size: 14px; } }
 
 .util-nav li {
   display: inline-block;
@@ -203,6 +214,9 @@ html.content-page {
   text-align: center;
   float: left;
   margin-bottom: 3em; }
+  @media (max-width: 1127px) {
+    .landing-section {
+      width: auto; } }
 
 .landing-section h2 {
   font-size: 26px;
